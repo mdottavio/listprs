@@ -68,10 +68,25 @@ var configHdl = function(){
       name: 'outLabel',
       default: config.outLabel
     }], function (err, result) {
+      result.inLabel = normalizeArray(result.inLabel);
+      result.outLabel = normalizeArray(result.outLabel);
       config = extend(config, result);
       deferred.resolve(config);
     });
     return deferred.promise;
+  };
+
+  var normalizeArray = function(string){
+    var result = [];
+    string = string.split(",");
+
+    for (var i = 0; i <= string.length - 1; i++) {
+      var val = string[i].trim();
+      if(val){
+        result.push(val);
+      }
+    }
+    return result;
   };
 
   /**

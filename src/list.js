@@ -7,17 +7,20 @@ var listHdl = function(){
   var Table = require('cli-table');
 
   // instantiate
-  var table = new Table({
-      head: ['PR'.blue, 'Author'.blue, 'Labels'.blue]
-    , colWidths: [50, 30, 50]
+  var headerTable = new Table({
+    colWidths: [20, 30]
+  });
+  var prsTable = new Table({
+    head: ['PR'.blue, 'Labels'.blue, 'Author'.blue],
+    colWidths: [70, 50, 20]
   });
 
-  var showTable = function(prs){
+  var showPrs = function(prs){
     for (var i = 0; i <= prs.items.length - 1; i++) {
-      var a = [ prs.items[i].pull_request.html_url, prs.items[i].user.login, processLabels(prs.items[i].labels) ];
-      table.push( a )
+      var a = [ prs.items[i].pull_request.html_url, processLabels(prs.items[i].labels), prs.items[i].user.login ];
+      prsTable.push( a )
     };
-    console.log(table.toString())
+    console.log(prsTable.toString())
   };
 
   var processLabels = function(labels){
@@ -28,15 +31,26 @@ var listHdl = function(){
     return result;
   };
 
+  var completeResults = function(prs, config){
+    showPrs(prs);
+    headerTable.push( ['Total Prs', prs.total_count] );
+    headerTable.push( ['Organization', config.organization] );
+    headerTable.push( ['Included Labels', config.inLabel.join(', ')] );
+    headerTable.push( ['Exclude Labels', config.outLabel.join(', ')] );
+    console.log(headerTable.toString());
+
+  };
+
   return {
-    showTable: showTable
+    showTable: showPrs,
+    show: completeResults
   }
 };
 module.exports = listHdl();
 
 
 // // table is an Array, so you can `push`, `unshift`, `splice` and friends
-// table.push(
+// prsTable.push(
 //     ['First valueFirst valueFirst valueFirst valueFirst valueFirst valueFirst value', 'Second value']
 //   , ['First value', 'Second value']
 // );
