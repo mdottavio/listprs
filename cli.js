@@ -1,7 +1,6 @@
 #! /usr/bin/env node --harmony
 
 'use strict';
-//TEST TOKEN 36f91a363e624cfd00f470542f88f8f14f638a06
 
 var program = require('commander');
 var chalk = require('chalk');
