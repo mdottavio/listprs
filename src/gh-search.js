@@ -3,12 +3,14 @@
 // var request = require('superagent');
 var request = require('request');
 var Q = require('q');
+var loader = require('./loader.js');
 
 var searchHdl = function(){
   var baseUrl = 'https://api.github.com/search/';
 
   var searchIssues = function(config){
     var deferred = Q.defer();
+    loader.start();
 
     request({
       uri: baseUrl + 'issues?q=' + queryString(config),
@@ -19,6 +21,7 @@ var searchHdl = function(){
       },
       method: 'GET'
     }, function (err, res, body) {
+      loader.stop();
       if(err){
         deferred.reject(err);
       } else {
