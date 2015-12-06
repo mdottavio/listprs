@@ -33,7 +33,6 @@ var searchHdl = function(){
   };
 
   var queryString = function(config){
-    // label:frontend+user:Olapic+state:open+type:pr+-label:wip
     var querystring = 'type:pr+state:open';
     querystring += (config.organization) ? '+user:'+config.organization : '';
     if(config.inLabel){
@@ -45,8 +44,7 @@ var searchHdl = function(){
     return querystring;
   };
 
-  var extractLabels = function(string, prefix){
-    var labels = string.split(',');
+  var extractLabels = function(labels, prefix){
     var result = '';
 
     prefix = prefix || '';
