@@ -20,5 +20,9 @@
     "prompt": "^0.2.14",
     "q": "^1.4.1",
     "request": "^2.67.0"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/mdottavio/listprs.git"
   }
 }
