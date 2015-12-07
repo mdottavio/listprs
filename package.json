@@ -1,7 +1,7 @@
 {
-  "name": "prs",
+  "name": "listprs",
   "version": "1.1.0",
-  "description": "",
+  "description": "A simple nodejs tool to list open PRs on your organization",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,7 @@
   "bin": {
     "listprs": "./cli.js"
   },
+  "keywords": ["cli", "prs", "github"],
   "dependencies": {
     "cli-table": "^0.3.1",
     "colors": "1.0.3",
