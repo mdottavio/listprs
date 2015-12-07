@@ -8,7 +8,7 @@ $ npm install -g listprs
 ```
 
 ## Usage
-Simple run:
+Just run:
 ```
 $ listprs
 ```
