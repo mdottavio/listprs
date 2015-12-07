@@ -8,6 +8,11 @@ var Q = require('q');
 var configHdl = function(){
   prompt.message = '';
   prompt.delimiter = '';
+
+  var makeitSafe = function(){
+    prompt.colors = false;
+  };
+
   var configFile = {
     path : __dirname + '/../conf/client.json',
     charSet : 'utf8'
@@ -108,7 +113,8 @@ var configHdl = function(){
   return {
     init: init,
     configureToken: configureToken,
-    config: config
+    config: config,
+    safe: makeitSafe
   };
 
 };
