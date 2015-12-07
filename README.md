@@ -7,6 +7,12 @@
 $ npm install -g listprs
 ```
 
+## Usage
+Simple run:
+```
+$ listprs
+```
+
 ## Configure
 The first time you run the command you will be prompted to complete the required configuration.
 You can re-configure the client any time by running.
@@ -26,3 +32,9 @@ You can search for open PRs using a list of labels, use comma to include more th
 
 #### (out) Labels 
 You can exclude open PRs using a list of labels, use comma to include more than one. 
+
+## Help
+List of options, run: 
+```
+$ listprs --help
+```
