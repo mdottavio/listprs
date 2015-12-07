@@ -1,5 +1,6 @@
 'use strict';
 
+var colors = require('./colors-wrapper.js');
 
 var listHdl = function(){
 
@@ -11,13 +12,13 @@ var listHdl = function(){
     colWidths: [20, 30]
   });
   var prsTable = new Table({
-    head: ['PR'.blue, 'Labels'.blue, 'Author'.blue],
+    head: [colors.white('PR'), colors.white('Labels'), colors.white('Author')],
     colWidths: [70, 50, 20]
   });
 
   var showPrs = function(prs){
     for (var i = 0; i <= prs.items.length - 1; i++) {
-      var a = [ prs.items[i].pull_request.html_url, processLabels(prs.items[i].labels), prs.items[i].user.login ];
+      var a = [ colors.green(prs.items[i].pull_request.html_url), processLabels(prs.items[i].labels), colors.grey(prs.items[i].user.login) ];
       prsTable.push( a )
     };
     console.log(prsTable.toString())
@@ -33,10 +34,10 @@ var listHdl = function(){
 
   var completeResults = function(prs, config){
     showPrs(prs);
-    headerTable.push( ['Total Prs', prs.total_count] );
-    headerTable.push( ['Organization', config.organization] );
-    headerTable.push( ['Included Labels', config.inLabel.join(', ')] );
-    headerTable.push( ['Exclude Labels', config.outLabel.join(', ')] );
+    headerTable.push( ['Total Prs', colors.grey((prs.total_count+''))] );
+    headerTable.push( ['Organization', colors.grey(config.organization)] );
+    headerTable.push( ['Included Labels', colors.grey(config.inLabel.join(', '))] );
+    headerTable.push( ['Exclude Labels', colors.grey(config.outLabel.join(', '))] );
     console.log(headerTable.toString());
 
   };
@@ -47,10 +48,3 @@ var listHdl = function(){
   }
 };
 module.exports = listHdl();
-
-
-// // table is an Array, so you can `push`, `unshift`, `splice` and friends
-// prsTable.push(
-//     ['First valueFirst valueFirst valueFirst valueFirst valueFirst valueFirst value', 'Second value']
-//   , ['First value', 'Second value']
-// );

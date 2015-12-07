@@ -3,7 +3,7 @@
 'use strict';
 
 var program = require('commander');
-var chalk = require('chalk');
+var colors = require('./src/colors-wrapper.js');
 var clientConfig = require('./src/config.js');
 var gh = require('./src/gh-search.js');
 var list = require('./src/list.js');
@@ -12,8 +12,13 @@ clientConfig.init();
 
 program
   .option('-c, --configure', 'prompt configuration section')
+  .option('-n, --nocolor', 'remove colors')
 .parse(process.argv);
 
+if(program.nocolor === true){
+  colors.safe();
+  clientConfig.safe();
+};
 
 function run(){
   gh.searchIssues(clientConfig.config)
@@ -21,18 +26,17 @@ function run(){
     list.show(prs, clientConfig.config);
   })
   .catch(function(err){
-    console.error(chalk.red('Error searching for PRs.'));
-    console.log(err);
+    console.log(colors.red(' × ') + 'Error searching for PRs.');
     console.log('Run listprs -c to reconfigure your client.')
   });
 }
 
 if(!clientConfig.config.token || program.configure){
   if(!program.configure){
-    console.error(chalk.red('Empty token.'));
-    console.log('Please create a new token on '+'https://github.com/settings/tokens/new'.green);
+    console.log(colors.red(' × ') + 'Empty token.');
+    console.log('Please create a new token on '+colors.green('https://github.com/settings/tokens/new'));
     console.log('and insert paste it below.');
-    console.log('Why do you we need it? '+'https://github.com/mdottavio/blabla#token'.green);
+    console.log('Why do you we need it? '+colors.green('https://github.com/mdottavio/blabla#token'));
   }
   clientConfig.configureToken()
   .then(run)
