@@ -19,7 +19,7 @@ You can re-configure the client any time by running.
 ```
 $ listprs -c
 ```
-The required confiration is:
+The required configuration is:
 
 #### Personal access tokens
 The [Personal access tokens](https://github.com/settings/tokens) functions like ordinary OAuth access tokens. We require a valid token to search into your repositories;
@@ -36,5 +36,11 @@ You can exclude open PRs using a list of labels, use comma to include more than 
 ## Help
 List of options, run: 
 ```
-$ listprs --help
+$ listprs --h
 ```
+
+## Did you find a 🐞 ?
+Feel free to [report any issue](https://github.com/mdottavio/listprs/issues) found.
+
+## License
+[MIT](LICENSE)

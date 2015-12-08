@@ -36,7 +36,7 @@ if(!clientConfig.config.token || program.configure){
     console.log(colors.red(' × ') + 'Empty token.');
     console.log('Please create a new token on '+colors.green('https://github.com/settings/tokens/new'));
     console.log('and insert paste it below.');
-    console.log('Why do you we need it? '+colors.green('https://github.com/mdottavio/blabla#token'));
+    console.log('Why do you we need it? '+colors.green('https://github.com/mdottavio/listprs#personal-access-tokens'));
   }
   clientConfig.configureToken()
   .then(run)
