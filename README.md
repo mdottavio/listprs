@@ -24,8 +24,8 @@ The required configuration is:
 #### Personal access tokens
 The [Personal access tokens](https://github.com/settings/tokens) functions like ordinary OAuth access tokens. We require a valid token to search into your repositories;
 
-#### Organization
-Used to filter the open PRs within a user's or organization's repositories; use comma to include more than one.
+#### User/Organization
+Used to filter the open PRs within a user's or organization's repositories.
 
 #### (in) Labels 
 You can search for open PRs using a list of labels, use comma to include more than one.

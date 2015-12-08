@@ -34,12 +34,17 @@ var searchHdl = function(){
 
   var queryString = function(config){
     var querystring = 'type:pr+state:open';
+    var lIn = '';
+    var lOut = '';
+
     querystring += (config.organization) ? '+user:'+config.organization : '';
     if(config.inLabel){
-      querystring += '+'+extractLabels(config.inLabel);
+      lIn = extractLabels(config.inLabel);
+      querystring += lIn ? '+'+lIn : '';
     }
     if(config.outLabel){
-      querystring += '+'+extractLabels(config.outLabel, '-');
+      lOut = extractLabels(config.outLabel, '-');
+      querystring += lOut ? '+'+lOut : '';
     }
     return querystring;
   };
@@ -49,7 +54,7 @@ var searchHdl = function(){
 
     prefix = prefix || '';
     for (var i = 0; i <= labels.length - 1; i++) {
-      result += prefix+'label:'+labels[i].trim();
+      result += (result ? '+' : '') + prefix+'label:'+labels[i].trim();
     }
     return result;
   };
