@@ -6,14 +6,12 @@ var Q = require('q');
 var loader = require('./loader.js');
 
 var searchHdl = function(){
-  var baseUrl = 'https://api.github.com/search/';
-
   var searchIssues = function(config){
     var deferred = Q.defer();
     loader.start();
 
     request({
-      uri: baseUrl + 'issues?q=' + queryString(config),
+      uri: config.apiUrl.replace(/\/$/, '') + '/search/issues?q=' + queryString(config),
       headers: {
         'Authorization': 'token ' + config.token,
         'Accept': 'application/json',

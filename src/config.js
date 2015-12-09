@@ -19,6 +19,7 @@ var configHdl = function(){
   };
   // default config object
   var config = {
+    'apiUrl': '',
     'token': '',
     'organization' : '',
     'inLabel' : [],
@@ -55,6 +56,10 @@ var configHdl = function(){
   var getUserToken = function(){
     var deferred = Q.defer();
     prompt.get([{
+      description: 'GitHub API url (default https://api.github.com for enterprise https://yourdomain.com/api/v3):',
+      name: 'apiUrl',
+      default: config.apiUrl
+    }, {
       description: 'Personal access tokens:',
       name: 'token',
       hidden: true,
