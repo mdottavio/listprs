@@ -11,9 +11,12 @@ var list = require('./src/list.js');
 clientConfig.init();
 
 program
-  .option('-c, --configure', 'prompt configuration section')
-  .option('-n, --nocolor', 'remove colors')
+  .option('-c, --configure', 'Prompt configuration section')
+  .option('-e, --empty-config [organization|inLabel|outLabel]', 'Emtpy a configuration value', /^(organization|inLabel|outLabel)$/i)
+  .option('-n, --nocolor', 'Remove colors')
+
 .parse(process.argv);
+
 
 if(program.nocolor === true){
   colors.safe();
@@ -33,17 +36,31 @@ function run(){
 
 if(!clientConfig.config.token || program.configure){
   if(!program.configure){
-    console.log(colors.red(' × ') + 'Empty token.');
-    console.log('Please create a new token on '+colors.green('https://github.com/settings/tokens/new'));
-    console.log('and insert paste it below.');
-    console.log('Why do you we need it? '+colors.green('https://github.com/mdottavio/listprs#personal-access-tokens'));
+    console.log('Please create a new token on '
+      +colors.green('https://github.com/settings/tokens/new')
+      +' and paste it below. Use Enter to confirm.');
+    console.log('Why do you we need it? '
+      +colors.green('https://github.com/mdottavio/listprs#personal-access-tokens'));
   }
   clientConfig.configureToken()
   .then(run)
   .catch(function(err){
-    console.error(chalk.red('Error saving token.'));
+    console.error(colors.red(' × ') + ' Error saving token');
     console.log(err);
   });
+} else if( program.emptyConfig ) {
+  if(typeof program.emptyConfig === 'string' ){
+    // empty configuration
+    clientConfig.empty(program.emptyConfig)
+    .then(function(){
+      console.log(colors.green(' ✓ ') + ' %s empty', program.emptyConfig);
+    })
+    .catch(function(err){
+      console.error(colors.red(' × ') + ' couldn\'t %s be empty', program.emptyConfig);
+    });
+  } else {
+    console.error(colors.red(' × ') + ' unknow config');
+  }
 } else {
   run();
 }
