@@ -56,10 +56,10 @@ if(!clientConfig.config.token || program.configure){
       console.log(colors.green(' ✓ ') + ' %s empty', program.emptyConfig);
     })
     .catch(function(err){
-      console.error(colors.red(' × ') + ' couldn\'t %s be empty', program.emptyConfig);
+      console.error(colors.red(' × ') + ' %s couldn\'t be empty', colors.grey(program.emptyConfig));
     });
   } else {
-    console.error(colors.red(' × ') + ' unknow config');
+    console.error(colors.red(' × ') + ' unknow config: %s', colors.grey(program.rawArgs[3]));
   }
 } else {
   run();
