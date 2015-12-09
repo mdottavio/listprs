@@ -21,8 +21,8 @@ var configHdl = function(){
   var config = {
     'token': '',
     'organization' : '',
-    'inLabel' : '',
-    'outLabel' : '',
+    'inLabel' : [],
+    'outLabel' : [],
   };
 
   /**
@@ -110,11 +110,35 @@ var configHdl = function(){
     return deferred.promise;
   };
 
+  /**
+   * [emptyConfig description]
+   * @param  {[type]} conf [description]
+   * @return {[type]}      [description]
+   */
+  var emptyConfig = function(conf){
+    var deferred = Q.defer();
+    if(conf === 'organization'){
+      config.organization = ''
+      saveConfig().then(function(){
+        deferred.resolve(config[conf]);
+      });
+    } else if(conf === 'inLabel' || conf === 'outLabel'){
+      config[conf] = [];
+      saveConfig().then(function(){
+        deferred.resolve(config[conf]);
+      });
+    } else {
+      deferred.reject('Unknow setting.');
+    }
+    return deferred.promise;
+  };
+
   return {
     init: init,
     configureToken: configureToken,
     config: config,
-    safe: makeitSafe
+    safe: makeitSafe,
+    empty: emptyConfig
   };
 
 };

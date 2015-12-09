@@ -33,10 +33,18 @@ You can search for open PRs using a list of labels, use comma to include more th
 #### (out) Labels 
 You can exclude open PRs using a list of labels, use comma to include more than one. 
 
-## Help
-List of options, run: 
+
+## Empty a config value
+``-e`` param empty the value of ``organization``, ``inLabel`` or ``outLabel``.
+
 ```
-$ listprs --h
+$ listprs -e [organization|inLabel|outLabel]
+```
+
+## Help
+List of options: 
+```
+$ listprs -h
 ```
 
 ## Did you find a 🐞 ?
