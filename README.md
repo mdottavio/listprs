@@ -21,6 +21,12 @@ $ listprs -c
 ```
 The required configuration is:
 
+#### GitHub API url
+Url to access GitHub's API.
+
+ - regular (default) ``https://api.github.com``
+ - enterprise ``https://yourdomain.com/api/v3``
+
 #### Personal access tokens
 The [Personal access tokens](https://github.com/settings/tokens) functions like ordinary OAuth access tokens. We require a valid token to search into your repositories;
 
