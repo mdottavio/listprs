@@ -52,7 +52,7 @@ var searchHdl = function(){
 
     prefix = prefix || '';
     for (var i = 0; i <= labels.length - 1; i++) {
-      result += (result ? '+' : '') + prefix+'label:'+labels[i].trim();
+      result += (result ? '+' : '') + prefix+'label:'+'"' + labels[i].trim() + '"';
     }
     return result;
   };
